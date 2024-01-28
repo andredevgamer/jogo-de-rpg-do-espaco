@@ -118,12 +118,48 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSpri
         pause(2000)
     } else if (sprites.readDataString(otherSprite, "nameNPC") == "ancião mistico") {
         game.showLongText("Você possui uma rara combinasão de coragem e sabedoria.Use este artefato para ampliar suas habilidades magicas", DialogLayout.Bottom)
+        addItem("cristal da sabedoria", img`
+            . . . . . . . 5 . . . . . . . . 
+            . . . . . . 5 9 5 . . . . . . . 
+            . . . . . 5 9 9 9 5 . . . . . . 
+            . . . . 5 5 9 1 9 5 5 . . . . . 
+            . . . . 5 9 5 9 5 9 5 . . . . . 
+            . . . . 5 9 9 5 9 9 5 . . . . . 
+            . . . . 5 9 1 5 9 1 5 . . . . . 
+            . . . . 5 1 9 5 9 1 5 . . . . . 
+            . . . . 5 9 1 5 1 9 5 . . . . . 
+            . . . . 5 1 1 5 9 1 5 . . . . . 
+            . . . . 5 9 9 5 9 9 5 . . . . . 
+            . . . . 5 9 5 9 5 9 5 . . . . . 
+            . . . . 5 5 9 9 9 5 5 . . . . . 
+            . . . . . 5 9 1 9 5 . . . . . . 
+            . . . . . . 5 9 5 . . . . . . . 
+            . . . . . . . 5 . . . . . . . . 
+            `)
         pause(2000)
     } else if (sprites.readDataString(otherSprite, "nameNPC") == "espireto da floresta") {
         game.showLongText("A natureza fala atraves do silensio.Ouça atentamente e os segredos deste planeta serão revelados", DialogLayout.Bottom)
         pause(2000)
     } else if (sprites.readDataString(otherSprite, "nameNPC") == "cientista aninigena") {
         game.showLongText("Ah, uma terraqua! Estol estudando as estrelas tambem.Aqui, deixe-me melhorar sua nave com tecnologia avançada", DialogLayout.Bottom)
+        addItem("modulador de campo quantico", img`
+            . 4 4 4 6 6 6 6 6 4 4 4 4 4 4 . 
+            . 4 4 6 4 4 4 4 4 6 4 4 4 9 4 . 
+            . 4 6 6 6 6 6 6 6 6 6 4 4 9 4 . 
+            . 4 6 6 6 4 4 4 6 7 6 4 4 9 4 . 
+            . 6 6 6 4 9 6 9 4 6 6 6 4 9 4 . 
+            . 6 6 4 9 9 6 9 9 4 6 6 4 9 4 . 
+            . 6 6 4 6 6 6 6 6 4 6 6 4 9 4 . 
+            . 6 6 4 9 9 6 9 9 4 6 6 4 9 4 . 
+            . 6 6 6 4 9 6 9 4 6 6 6 4 4 4 . 
+            . 6 6 6 6 4 4 4 6 6 6 6 4 9 4 . 
+            . 6 4 6 6 6 6 6 6 6 4 6 4 9 4 . 
+            . 6 4 4 6 4 4 4 6 4 4 6 4 9 4 . 
+            . 4 6 4 4 6 9 6 4 4 6 4 4 9 4 . 
+            . 4 6 2 6 4 4 4 6 9 6 4 4 9 4 . 
+            . 4 4 6 4 4 4 4 4 6 4 4 4 9 4 . 
+            . 4 4 4 6 6 6 6 6 4 4 4 4 4 4 . 
+            `)
         pause(2000)
     }
 })
@@ -172,6 +208,9 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile32`, function (sprite, 
         lantern.setLightBandWidth(10)
     }
 })
+scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileDarkGrass1, function (sprite, location) {
+    tiles.placeOnRandomTile(sprite, sprites.castle.tileDarkGrass3)
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (sprites.readDataString(pistola, "nameArma") == "gajado inicial") {
         projectile = sprites.createProjectileFromSprite(img`
@@ -180,6 +219,48 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             5 5 5 5 
             . 5 5 . 
             `, pistola, 100, 0)
+    }
+    if (estarEspaço) {
+        for (let value of toolbar.get_items()) {
+            if (value.get_text(ItemTextAttribute.Name) == "modulador de campo quantico") {
+                mySprite3 = sprites.create(img`
+                    ...........99999999999...........
+                    ........99999999999999999........
+                    .......9.999999999999999.9.......
+                    ......99999...........99999......
+                    ....99999...............99999....
+                    ....999...................999....
+                    ...999.....................999...
+                    ..999.......................999..
+                    .9.99.......................99.9.
+                    .999.........................999.
+                    .999.........................999.
+                    999...........................999
+                    999...........................999
+                    999...........................999
+                    999...........................999
+                    999...........................999
+                    999...........................999
+                    999...........................999
+                    999...........................999
+                    999...........................999
+                    999...........................999
+                    999...........................999
+                    .999.........................999.
+                    .999.........................999.
+                    .9.99.......................99.9.
+                    ..999.......................999..
+                    ...999.....................999...
+                    ....999...................999....
+                    ....99999...............99999....
+                    ......99999...........99999......
+                    .......9.999999999999999.9.......
+                    ........99999999999999999........
+                    ...........99999999999...........
+                    `, SpriteKind.Player)
+                mySprite3.setPosition(nave_princesa.x, nave_princesa.y)
+            }
+        }
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile33`, function (sprite, location) {
@@ -224,6 +305,7 @@ function creteplayer () {
         `, SpriteKind.Player)
     controller.moveSprite(princesa, 100, 100)
     rpg.attachToSprite(rpg.character("princesa"), nave_princesa)
+    estarNoEspaço = false
     createHUD()
     characterAnimations.loopFrames(
     princesa,
@@ -670,6 +752,7 @@ function areaEspaço () {
         ........999.....................
         `, SpriteKind.Player)
     rpg.attachToSprite(rpg.character("nave princesa"), nave_princesa)
+    estarNoEspaço = true
     controller.moveSprite(nave_princesa, 100, 100)
     tiles.placeOnRandomTile(nave_princesa, assets.tile`myTile1`)
     scene.cameraFollowSprite(nave_princesa)
@@ -1307,6 +1390,12 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile20`, function (sprite, 
     estarEspaço = true
     areaEspaço()
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile36`, function (sprite, location) {
+    sprites.destroyAllSpritesOfKind(SpriteKind.Player)
+    sprites.destroyAllSpritesOfKind(SpriteKind.NPC)
+    estarEspaço = true
+    areaEspaço()
+})
 function createHUD () {
     foto = sprites.create(img`
         f f f f f f f f f f f f f f f f 
@@ -1388,6 +1477,7 @@ function removeItem (name: string) {
     toolbar.update()
 }
 function Mapaplaneta (name: string) {
+    creteplayer()
     if (name == "cristal") {
         tiles.setCurrentTilemap(tilemap`level4`)
         for (let value of tiles.getTilesByType(assets.tile`myTile28`)) {
@@ -1431,6 +1521,30 @@ function Mapaplaneta (name: string) {
         }
     } else if (name == "florestal") {
         tiles.setCurrentTilemap(tilemap`level5`)
+        tiles.placeOnRandomTile(princesa, assets.tile`myTile35`)
+        for (let value of tiles.getTilesByType(assets.tile`myTile30`)) {
+            mySprite2 = sprites.create(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . 9 9 9 . . . . . . 
+                . . . . . . 9 9 9 9 9 . . . . . 
+                . . . . . 9 9 1 9 1 9 9 . . . . 
+                . . . . . 9 9 1 9 1 9 9 . . . . 
+                . . . . 9 9 9 9 9 9 9 9 9 . . . 
+                . . 9 9 9 9 9 9 9 9 9 9 9 9 9 . 
+                . 9 9 9 . 9 9 9 9 9 9 9 . 9 9 9 
+                . 9 9 9 . 9 9 9 9 9 9 9 . 9 9 9 
+                . 9 . 9 . 9 9 9 9 9 9 9 . 9 . 9 
+                . . . . . . 9 9 9 9 9 . . . . . 
+                . . . . . . 9 9 9 9 9 . . . . . 
+                . . . . . . . 9 9 9 . . . . . . 
+                . . . . . . . 9 9 . . . . . . . 
+                . . . . . . . . 9 . . . . . . . 
+                `, SpriteKind.NPC)
+            sprites.setDataString(mySprite2, "nameNPC", "espireto da floresta")
+            tiles.placeOnTile(mySprite2, value)
+            tiles.setTileAt(value, sprites.castle.tileGrass2)
+        }
     } else if (name == "gelo") {
         tiles.setCurrentTilemap(tilemap`level6`)
         effects.starField.startScreenEffect()
@@ -1465,7 +1579,6 @@ function Mapaplaneta (name: string) {
     sprites.destroyAllSpritesOfKind(SpriteKind.planeta)
     sprites.destroyAllSpritesOfKind(SpriteKind.armaPlayer)
     sprites.destroy(nave_princesa)
-    creteplayer()
     pistola = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -1486,6 +1599,7 @@ function Mapaplaneta (name: string) {
         `, SpriteKind.armaPlayer)
     estarEspaço = true
 }
+let mySprite2: Sprite = null
 let armadura_da_gurdiã_do_tempo: rpg.Entity = null
 let armadura_da_Sabedoria: rpg.Entity = null
 let armadura_Estelar: rpg.Entity = null
@@ -1501,7 +1615,9 @@ let planeta_vucânico: Sprite = null
 let planeta_de_gelo: Sprite = null
 let planeta_florestal: Sprite = null
 let planeta_de_crital: Sprite = null
+let estarNoEspaço = false
 let nave_princesa: Sprite = null
+let mySprite3: Sprite = null
 let projectile: Sprite = null
 let toolbar: Inventory.Toolbar = null
 let princesa: Sprite = null
